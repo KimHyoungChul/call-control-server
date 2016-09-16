@@ -37,6 +37,12 @@ function MemberRegistry() {
     this.memberById = {};
 }
 MemberRegistry.prototype.register = function(member) {
+	for (var id in this.memberById) {
+		var m = this.memberById[id];
+		if (m.callId == member.callId && m.name == member.name)
+			delete m;
+	}
+	console.log(this.memberById);
     this.memberById[member.id] = member;
 }
 MemberRegistry.prototype.unregister = function(id) {

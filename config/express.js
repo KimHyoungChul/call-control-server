@@ -11,7 +11,11 @@ module.exports = function(app, config) {
   var env = process.env.NODE_ENV || 'development';
   app.locals.ENV = env;
   app.locals.ENV_DEVELOPMENT = env == 'development';
-  
+  app.use(function(req, res, next) {
+      res.header("Access-Control-Allow-Origin", "*");
+      res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+      next();
+  });
 
   // app.use(favicon(config.root + '/public/img/favicon.ico'));
   app.use(logger('dev'));
@@ -24,9 +28,11 @@ module.exports = function(app, config) {
   app.use(express.static(config.root + '/public'));
   app.use(methodOverride());
 
+  require('../app/demo/api')(app);
+
   var controllers = glob.sync(config.root + '/app/controllers/*.js');
   controllers.forEach(function (controller) {
-    require(controller);
+    require(controller)(app);
   });
 
   app.use(function (req, res, next) {
@@ -35,25 +41,5 @@ module.exports = function(app, config) {
     next(err);
   });
   
-  var errorTemplate = require('marko').load(require.resolve('../app/views/error.marko'));
-  if(app.get('env') === 'development'){
-    app.use(function (err, req, res, next) {
-      res.status(err.status || 500);
-      errorTemplate.render({
-        message: err.message,
-        error: err,
-        title: 'error'
-      }, res);
-    });
-  }
-
-  app.use(function (err, req, res, next) {
-    res.status(err.status || 500);
-      errorTemplate.render({
-        message: err.message,
-        error: {},
-        title: 'error'
-      }, res);
-  });
 
 };
