@@ -273,6 +273,9 @@ module.exports = {
                         case 'stop':
                             stop(sessionId);
                             break;
+                        case 'chat':
+                            chat(message.userId,message.text);
+                            break;
                         case 'onPublishIceCandidate':
                             onPublishIceCandidate(sessionId, message.candidate);
                             break;
@@ -534,6 +537,30 @@ function discard(memberId) {
         member.invited = false;
     }
     broadcastMember();
+}
+
+function chat(userId, text) {
+    var member = _.find(memberRegistry.memberById, function(m) {
+        return m.userId == userId;
+    });
+    if (member) {
+        _.each(memberRegistry.memberById, function(m)
+                {
+                    try
+                    {
+                        m.ws.send(JSON.stringify(
+                        {
+                            id: 'chat',
+                            user: member.profile.name,
+                            text: text
+                        }));
+                    }
+                    catch (exception)
+                    {
+                        console.log(exception);
+                    }
+                });
+    }
 }
 
 function broadcastMember()

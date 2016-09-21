@@ -43,14 +43,14 @@ var config = {
     app: {
       name: 'call-control-server'
     },
-    port: process.env.PORT || 8443,
+    port: process.env.PORT || 9443,
     db: 'mongodb://localhost/call-control-server-production',
-    http_uri: "https://demo.vietinterview.com:8443/",
+    http_uri: "https://vietinterview.com:9443/",
     ws_uri: "wss://demo.vietinterview.com:8888/kurento",
     security:
     	{
-    	  //  key: fs.readFileSync('/etc/letsencrypt/live/training.demo.vietinterview.com/privkey.pem'),
-    	   // cert: fs.readFileSync('/etc/letsencrypt/live/training.demo.vietinterview.com/fullchain.pem')
+    	  // key: fs.readFileSync('/etc/letsencrypt/live/vietinterview.com/privkey.pem'),
+    	 //   cert: fs.readFileSync('/etc/letsencrypt/live/vietinterview.com/fullchain.pem')
     	}
   }
 };

@@ -40,7 +40,7 @@ var one2manyWss = new ws.Server({
     path : '/one2many'
 });
 
-require('./app/socket/one2one').interview(one2oneWss);
+//require('./app/socket/one2one').interview(one2oneWss);
 require('./app/socket/one2many').conference(one2manyWss);
 
 
