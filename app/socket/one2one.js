@@ -29,6 +29,7 @@ function Member(id, name, callId, ws) {
     this.peerId = null;
     this.sdpOffer = null;
 }
+
 Member.prototype.sendMessage = function(message) {
     this.ws.send(JSON.stringify(message));
 }
