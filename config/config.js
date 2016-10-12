@@ -30,8 +30,8 @@ var config = {
     ws_uri: "ws://demo.vietinterview.com:8888/kurento",
     security:
     	{
-    		key: '/etc/letsencrypt/live/training.demo.vietinterview.com/privkey.pem',
-    		cert: '/etc/letsencrypt/live/training.demo.vietinterview.com/fullchain.pem'
+    		key: '/etc/letsencrypt/live/demo.vietinterview.com/privkey.pem',
+    		cert: '/etc/letsencrypt/live/demo.vietinterview.com/fullchain.pem'
     	}
   },
 
